@@ -1,0 +1,19 @@
+services:
+  api:
+    build: .
+    ports:
+      - 8000:8000
+    environment:
+      DB_URL: mongodb://db/bookstore_fastapi_jwt 
+      JWT_SECRET_KEY: 
+      JWT_REFRESH_SECRET_KEY: 
+      ALGORITHM: HS256
+  db:
+    image: mongo:4.0-xenial
+    ports:
+      - 27017:27017
+    volumes:
+      - bookstore_fastapi_jwt:/data/db
+      
+volumes:
+  bookstore_fastapi_jwt:

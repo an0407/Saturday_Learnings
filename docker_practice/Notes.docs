@@ -1,0 +1,134 @@
+<<<<<<< HEAD
+- docker run ubuntu
+    pulls the ubuntu image from the docker hub and start a container.
+
+- docker ps  
+    Currently running programs
+
+- docker ps -a 
+    shows even the stopped containers(in this case ubuntu container would have stopped automatically since we didnt interact with it)
+
+- docker image ls
+    Shows all docker images available locally
+
+- docker run -it ubuntu
+    Start a container in the interactive mode and load the ubuntu image that we have stored locally
+    A shell interface will start with root user with highest priviledges.
+
+- Some basic Linux Commands:
+    - echo hello : will display 'hello'
+    - whoami : will display the current user ( in this case 'root')
+    - echo $0 : location of this shell
+
+- Just like package managers like 'pip', 'npm' etc, in ubuntu we have a package manager called 'apt'
+    - apt list : list all packages in this database
+    - apt update : update the package database. NOTE: Always run this command before installing a package
+    - apt remove 'package name' to remove an installed package, ex: apt remove nano
+
+- dockerignore file:
+    dockerignore file is used to exclude files that we copy to our docker image (virtual environment, .env file, etc)
+    create the .dockerignore file and add the names of the directories and files you wanna avoid transferring.
+
+- Difference between COPY and ADD
+    They are pretty much the same commands, except ADD offers added benefits
+    using ADD you can copy files from links as well as add zip files to extract the full content automatically.
+
+- Difference between CMD and ENTRYPOINT:
+    CMD can be over written when running the docker image, while ENTRYPOINT cannot be easily over written.    
+
+- docker history 'name of image'
+    command can be used to view the history of layers created while building a docker image.
+
+- docker build -t 'image_name' .
+    Used to build the docker image using the dockerfile
+
+- docker run 'image_name'
+    Used to run a built image
+
+- docker login
+    used to login to your docker account
+
+- docker push 'image name'
+    pushes the image to repository in docker-hub
+
+- docker pull 'image name'
+    pulls the image from docker-hub
+
+- docker-compose build
+    Used to build the images using the docker-compose file
+
+- docker-compose up
+    used to run the image built using docker-compose
+
+- docker-compose down
+    used to stop and remove everything created by docker-compose up, like stop containers, remove containers, remove default networks
+
+- docker-compose up --build
+=======
+- docker run ubuntu
+    pulls the ubuntu image from the docker hub and start a container.
+
+- docker ps  
+    Currently running programs
+
+- docker ps -a 
+    shows even the stopped containers(in this case ubuntu container would have stopped automatically since we didnt interact with it)
+
+- docker image ls
+    Shows all docker images available locally
+
+- docker run -it ubuntu
+    Start a container in the interactive mode and load the ubuntu image that we have stored locally
+    A shell interface will start with root user with highest priviledges.
+
+- Some basic Linux Commands:
+    - echo hello : will display 'hello'
+    - whoami : will display the current user ( in this case 'root')
+    - echo $0 : location of this shell
+
+- Just like package managers like 'pip', 'npm' etc, in ubuntu we have a package manager called 'apt'
+    - apt list : list all packages in this database
+    - apt update : update the package database. NOTE: Always run this command before installing a package
+    - apt remove 'package name' to remove an installed package, ex: apt remove nano
+
+- dockerignore file:
+    dockerignore file is used to exclude files that we copy to our docker image (virtual environment, .env file, etc)
+    create the .dockerignore file and add the names of the directories and files you wanna avoid transferring.
+
+- Difference between COPY and ADD
+    They are pretty much the same commands, except ADD offers added benefits
+    using ADD you can copy files from links as well as add zip files to extract the full content automatically.
+
+- Difference between CMD and ENTRYPOINT:
+    CMD can be over written when running the docker image, while ENTRYPOINT cannot be easily over written.    
+
+- docker history 'name of image'
+    command can be used to view the history of layers created while building a docker image.
+
+- docker build -t 'image_name' .
+    Used to build the docker image using the dockerfile
+
+- docker run 'image_name'
+    Used to run a built image
+
+- docker login
+    used to login to your docker account
+
+- docker push 'image name'
+    pushes the image to repository in docker-hub
+
+- docker pull 'image name'
+    pulls the image from docker-hub
+
+- docker-compose build
+    Used to build the images using the docker-compose file
+
+- docker-compose up
+    used to run the image built using docker-compose
+
+- docker-compose down
+    used to stop and remove everything created by docker-compose up, like stop containers, remove containers, remove default networks
+
+- docker-compose up --build
+>>>>>>> bf3db6b744f241400cb1d37899c1aa1357653240
+    used to build and run a docker-compose image in one go
