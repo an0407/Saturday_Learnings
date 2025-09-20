@@ -1,0 +1,51 @@
+What is Yolo Model:
+- Yolo is an effective object detection model for quick and efficient object detection. 
+
+Steps:
+- First create a dataset of images for training the model.
+- Annotate the images for the object that we want to identfy.
+- For images in which we want to identify more than 1 object, we must associate classes with each type of annotation. (eg: class1-players,
+    class2-goalkeepers, class3- ball, class4- Ball)
+- Then we use these set of annotated images to train the model. 
+- While training the model, use higher epochs for more accuracy. use high image resolution if you want to detect small objects or objects that can
+    usually get merged with background (Like a ball in a football stadium)
+- Then validate the model to measure the precision in prediction for each class.
+- We can either deploy the model to the Roboflow universe, or we can use the best.pt(pytorch file) created during the training process.
+- Use the Trained model to predict on actual data that we want to identify the objects.
+
+What I did for Football AI:
+- First I used already annotated images of players, ball, goal keepers, and refree with proper classification from the Roboflow Universe.
+    (https://app.roboflow.com/anushspvtworkspace/football-players-detection-3zvbc-gmjzv/1)
+- Roboflow automatically splits the images into Train, test and validation Steps
+- I downloaded the images into a zip file and used them for training my model.
+- I used the YoloV8n model for trainig on these annotated images with a batch size of 4, 100 epoch (Increased accuracy with more epoch), and an image
+    resolution of 1920 pixels (default is 640, i chose 1920 for enhanced ball detection)
+- Then I used the trained model (best.pt file) to create 4 videos from a single source video:
+    - First a basic video with ball, player, refree and goalkeeper detection.
+    - Then a video game style annotated video
+    - a video with proper player tracking with tracker id for each player
+    - 4th video properly classifies players into 2 teams
+- First 3 videos was created directly from the trained model
+- for the 4th video, I used embedding analysis for identifying 2 teams, UMAP for dimensionality reduction and Kmeans to cluster the players into 2 
+    seperate teams.
+
+Advantage of using local pytorch file over deployed model from roboflow:
+- Eventhough training takes time, the .pt file created during training can be used to predict on images much faster as it used GPU. The model we pull
+    from Roboflow will be slow as it can only run on cpu.
+
+Process of Video Generation:
+- split the video into its individual frames using the supervision library (supervision.get_video_frames_generator())
+- predict on the individual frames using the model.
+- combine all the predicted frames again to form the object annotation applied video.
+
+PROCESS OF TEAM DETECTION:
+- In short: run the object detection model, drop the images into players, use average pixel colours(team jersey colours) to classify into 2 teams.
+    Problems with this approach
+    - Individual player boxes will have background apart from player
+    - 2 players can be together in a single boxe
+    - proportion of background can vary depending on player position
+- To overcome these drawbacks we use Embedding Models for players' team detection.
+- Embedding models capture the semantic meaning of images (more accurate than average pixel colour estimation)
+- I used the Siglip(Sigmoid Loss for Language Image Pre-Training) for classification into to 2 teams.
+- Siglip creates High dimentional vectors. so I used UMAP for dimentionality reduction to map to 3 dimentional space
+- Then I used Kmeans to cluster the similar data points into 2 clusters(teams).
